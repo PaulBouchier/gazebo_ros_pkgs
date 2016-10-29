@@ -106,9 +106,12 @@ catkin_package(
   gazebo_ros_projector 
   gazebo_ros_prosilica 
   gazebo_ros_force 
+  gazebo_ros_set_joint 
   gazebo_ros_joint_trajectory 
   gazebo_ros_joint_state_publisher 
   gazebo_ros_joint_pose_trajectory
+  gazebo_ros_cart_drive
+  gazebo_ros_joint_speed_ctrlr
   gazebo_ros_diff_drive
   gazebo_ros_tricycle_drive
   gazebo_ros_skid_steer_drive
@@ -236,6 +239,9 @@ target_link_libraries(gazebo_ros_prosilica gazebo_ros_camera_utils ${GAZEBO_LIBR
 add_library(gazebo_ros_force src/gazebo_ros_force.cpp)
 target_link_libraries(gazebo_ros_force ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
+add_library(gazebo_ros_set_joint src/gazebo_ros_set_joint.cpp)
+target_link_libraries(gazebo_ros_set_joint ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+
 add_library(gazebo_ros_joint_trajectory src/gazebo_ros_joint_trajectory.cpp)
 add_dependencies(gazebo_ros_joint_trajectory ${catkin_EXPORTED_TARGETS})
 target_link_libraries(gazebo_ros_joint_trajectory ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
@@ -250,6 +256,12 @@ target_link_libraries(gazebo_ros_joint_state_publisher ${GAZEBO_LIBRARIES} ${SDF
 add_library(gazebo_ros_joint_pose_trajectory src/gazebo_ros_joint_pose_trajectory.cpp)
 add_dependencies(gazebo_ros_joint_pose_trajectory ${catkin_EXPORTED_TARGETS})
 target_link_libraries(gazebo_ros_joint_pose_trajectory ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+
+add_library(gazebo_ros_cart_drive src/gazebo_ros_cart_drive.cpp)
+target_link_libraries(gazebo_ros_cart_drive gazebo_ros_utils ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+
+add_library(gazebo_ros_joint_speed_ctrlr src/gazebo_ros_joint_speed_ctrlr.cpp)
+target_link_libraries(gazebo_ros_joint_speed_ctrlr gazebo_ros_utils ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 add_library(gazebo_ros_diff_drive src/gazebo_ros_diff_drive.cpp)
 target_link_libraries(gazebo_ros_diff_drive gazebo_ros_utils ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
@@ -312,9 +324,11 @@ install(TARGETS
   gazebo_ros_projector
   gazebo_ros_prosilica
   gazebo_ros_force
+  gazebo_ros_set_joint
   gazebo_ros_joint_trajectory
   gazebo_ros_joint_state_publisher
   gazebo_ros_joint_pose_trajectory
+  gazebo_ros_cart_drive
   gazebo_ros_diff_drive
   gazebo_ros_tricycle_drive
   gazebo_ros_skid_steer_drive
